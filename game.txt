@@ -1,0 +1,54 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+string getComputerChoice() {
+    int choice = rand() % 3;  // Generate a random number between 0 and 2
+    if (choice == 0)
+        return "rock";
+    else if (choice == 1)
+        return "paper";
+    else
+        return "scissors";
+}
+
+string getWinner(string userChoice, string computerChoice) {
+    if (userChoice == computerChoice)
+        return "It's a tie!";
+    else if ((userChoice == "rock" && computerChoice == "scissors") ||
+             (userChoice == "paper" && computerChoice == "rock") ||
+             (userChoice == "scissors" && computerChoice == "paper"))
+        return "You win!";
+    else
+        return "Computer wins!";
+}
+
+int main() {
+    srand(static_cast<unsigned int>(time(0)));  // Initialize random seed
+
+    string userChoice;
+    string computerChoice;
+    char playAgain;
+
+    cout << "Welcome to Rock, Paper, Scissors Game!" << endl;
+
+    do {
+        cout << "Enter your choice (rock, paper, or scissors): ";
+        cin >> userChoice;
+
+        computerChoice = getComputerChoice();
+        cout << "Computer chose: " << computerChoice << endl;
+
+        cout << getWinner(userChoice, computerChoice) << endl;
+
+        cout << "Do you want to play again? (y/n): ";
+        cin >> playAgain;
+
+    } while (playAgain == 'y' || playAgain == 'Y');
+
+    cout << "Thanks for playing!" << endl;
+
+    return 0;
+}
